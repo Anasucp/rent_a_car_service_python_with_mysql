@@ -30,7 +30,7 @@ def add_booking():
     booking_date = input("Enter Booking Date (YYYY-MM-DD): ")
 
     # Define the SQL statement for inserting a booking
-    insert_booking = "INSERT INTO bookings (client_id, car_id,driver_id, booking_date) VALUES (%s, %s, %s)"
+    insert_booking = "INSERT INTO bookings (client_id, car_id,driver_id, booking_date) VALUES (%s, %s, %s,%s)"
     booking_data = (client_id, car_id,driver_id, booking_date)
 
     # Execute the SQL statement to insert the booking
@@ -44,7 +44,21 @@ def add_booking():
 
 # function for displaying or viewing the booking list
 def view_bookings():
-    select_bookings = "SELECT * FROM bookings"
+    select_bookings = """
+     SELECT 
+        bookings.booking_id, 
+        CASE WHEN bookings.driver_id IS NOT NULL THEN drivers.name ELSE 'No driver' END AS driver_name,
+        CASE WHEN bookings.driver_id IS NOT NULL THEN drivers.cnic_no ELSE 'No driver' END AS driver_cnic,
+        clients.name AS client_name, 
+        clients.cnic AS client_cnic,
+        cars.company_name AS car_company,
+        cars.reg_number AS car_reg_number,
+        bookings.booking_date
+    FROM bookings
+    INNER JOIN clients ON bookings.client_id = clients.id
+    INNER JOIN cars ON bookings.car_id = cars.id
+    LEFT JOIN drivers ON bookings.driver_id = drivers.id
+    """
 
     # Execute the query to retrieve bookings with client and car details
     cursor = database.execute_query( select_bookings)
@@ -58,7 +72,7 @@ def view_bookings():
         # Convert the booking data to a list of lists
         booking_data = [list(booking) for booking in bookings]
 
-        headers = ["Booking ID", "Client ID","Car ID","Driver ID", "Booking Date"]
+        headers = ["Booking ID", "Driver Name", "Driver CNIC", "Client Name", "Client CNIC", "Car Company", "Car Reg Number", "Booking Date","Created","Updated"]
 
         # Use tabulate to display the bookings in a tabulated format
         booking_table = tabulate(booking_data, headers, tablefmt="grid")

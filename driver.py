@@ -9,8 +9,19 @@ drivers = []
 def add_driver():
     name = input("Enter your Name:")
     age = int(input("Enter your age:"))
-    cnic_no = int(input("Enter your CNIC Number:"))
-    license_no = int(input("Enter your License number:"))
+    while True:
+        cnic = input("Enter your 13 Digit CNIC Number:")
+        if len(cnic)==13:
+            break
+        else:
+            print("Invalid Cnic")
+    while True:
+        license_no = int(input("Enter your License number:"))
+        if len(license_no)==13:
+            break
+        else:
+            print("Invalid license_no")
+    
 
 # SQL statement for inserting a car
     insert_driver = "INSERT INTO drivers (name,age,cnic_no,license_no) VALUES ( %s, %s,%s,%s)"

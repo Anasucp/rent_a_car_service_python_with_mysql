@@ -10,7 +10,7 @@ def execute_query(query, data=None):
 def commit_and_close():
 
     conn.commit()
-    conn.close()
+    # conn.close()
 
 
 # DRY => Don't Repeat Yourself

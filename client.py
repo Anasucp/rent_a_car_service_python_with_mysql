@@ -10,8 +10,18 @@ clients = []
 def add_client():
     name = input("Enter your Name:")
     age = int(input("Enter your age:"))
-    cnic = int(input("Enter your CNIC Number:"))
-    phone_number = int(input("Enter your phone number:"))
+    while True:
+        cnic = input("Enter your 13 Digit CNIC Number:")
+        if len(cnic)==13:
+            break
+        else:
+            print("Invalid Cnic")
+    while True:
+        phone_number =input("Enter your phone number:")
+        if len(phone_number)==11:
+            break
+        else:
+            print("Enter Valid phone_number")
 
     # SQL statement for inserting a client
     insert_client = "INSERT INTO clients (name, age, cnic, phone_number) VALUES (%s, %s, %s, %s)"
