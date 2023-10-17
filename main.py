@@ -2,22 +2,11 @@ from client import add_client, view_clients
 from car  import add_car, view_cars
 from driver import add_driver, view_drivers
 from booking import add_booking, view_bookings
-import database
-import mysql.connector
 
-
-conn = database.connect_to_database()
-
-database.commit_and_close(conn)
 
 # main menu function
 def main_menu():
     print("/------------Welcome to Rent a Car service------------/")
-
-
-
-
-
     print("Main menu.")
     print("1.Add client")
     print("2.view client")
@@ -49,7 +38,7 @@ while True:
     if choice == "7":
         add_booking()
     elif choice == "8":
-        view_bookings()
+       view_bookings()
     elif choice == "9":
     	print("Thanks for choosing Our reant a car service :)")
     	break

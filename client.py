@@ -1,7 +1,6 @@
 import database
 #library for displaying list in table form
 from tabulate import tabulate
-import mysql.connector
 
 #list for storing clients data
 clients = []
@@ -14,16 +13,12 @@ def add_client():
     cnic = int(input("Enter your CNIC Number:"))
     phone_number = int(input("Enter your phone number:"))
 
-    # Connect to the database
-    conn = database.connect_to_database()
-
     # SQL statement for inserting a client
     insert_client = "INSERT INTO clients (name, age, cnic, phone_number) VALUES (%s, %s, %s, %s)"
     client_data = (name, age, cnic, phone_number)
 
-    cursor = database.execute_query(conn, insert_client, client_data)
-
-    database.commit_and_close(conn)
+    cursor = database.execute_query(insert_client, client_data)
+    database.commit_and_close()
 
     print("Client added successfully.")
 
@@ -31,12 +26,11 @@ def add_client():
 
 
 def view_clients():
-    conn = database.connect_to_database()
 
     select_clients = "SELECT * FROM clients"
 
 
-    cursor = database.execute_query(conn, select_clients)
+    cursor = database.execute_query(select_clients)
 
     clients = cursor.fetchall()
 
@@ -46,7 +40,7 @@ def view_clients():
         # Convert the client data to a list of lists
         client_data = [list(client) for client in clients]
 
-        headers = ["Client ID", "Name", "Age", "CNIC Number", "Phone Number"]
+        headers = ["Client ID", "Name", "Age", "CNIC Number", "Phone Number","Created","updated"]
 
         # tabulate to display the clients in a table format
         table = tabulate(client_data, headers, tablefmt="grid")
@@ -54,4 +48,4 @@ def view_clients():
         print(table)
 
     # Close the database connection
-    database.commit_and_close(conn)
+    database.commit_and_close()

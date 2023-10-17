@@ -1,22 +1,16 @@
 import mysql.connector
+from config.db import conn
 
-def connect_to_database():
+def execute_query(query, data=None):
 
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="ans",
-        password="ans",
-        database="rent_a_car_service"
-    )
-    return conn
-
-def execute_query(connection, query, data=None):
-
-    cursor = connection.cursor()
+    cursor = conn.cursor()
     cursor.execute(query, data)
     return cursor
 
-def commit_and_close(connection):
+def commit_and_close():
 
-    connection.commit()
-    connection.close()
+    conn.commit()
+    conn.close()
+
+
+# DRY => Don't Repeat Yourself

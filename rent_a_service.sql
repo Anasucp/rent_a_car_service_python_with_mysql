@@ -35,12 +35,14 @@ CREATE TABLE `drivers`(
 );
 
 CREATE TABLE `bookings`(
-	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	`car_id` INT NOT NULL,
+	`booking_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`client_id` INT NOT NULL,
+	`car_id` INT NOT NULL,
+	`driver_id` INT NOT NULL,
 	`booking_date` DATE NOT NULL,
 	`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (car_id) REFERENCES cars(id),
-	FOREIGN KEY (client_id) REFERENCES clients(id)
+	FOREIGN KEY (client_id) REFERENCES clients(id),
+	FOREIGN KEY (driver_id) REFERENCES drivers(id)
 );
