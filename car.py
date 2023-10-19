@@ -10,10 +10,11 @@ def add_car():
     company_name = input("Enter Company Name:")
     model_number = input("Enter Model Number:")
     reg_number = int(input("Enter Registration Number:"))
+    price_per_day = int(input("Enter the car per day price:"))
 
 # SQL statement for inserting a car
-    insert_car = "INSERT INTO cars (company_name, model_number, reg_number) VALUES ( %s, %s, %s)"
-    car_data = (company_name, model_number, reg_number)
+    insert_car = "INSERT INTO cars (company_name, model_number, reg_number,price_per_day) VALUES ( %s, %s, %s,%s)"
+    car_data = (company_name, model_number, reg_number,price_per_day)
 
     cursor = database.execute_query(insert_car, car_data)
     database.commit_and_close()
@@ -35,7 +36,7 @@ def view_cars():
         # Convert the car data to a list of lists
         car_data = [list(car) for car in cars]
 
-        headers = ["ID", "Company_Name", "Model_Number", "REG_Number", "Created","updated"]
+        headers = ["ID", "Company_Name", "Model_Number", "REG_Number","Price_Per_Day", "Created","updated"]
 
         # tabulate to display the cars in a table format
         table = tabulate(car_data, headers, tablefmt="grid")

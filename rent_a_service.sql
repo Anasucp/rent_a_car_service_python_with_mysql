@@ -19,6 +19,7 @@ CREATE TABLE `cars`(
 	`company_name` VARCHAR(255) NOT NULL,
 	`model_number` VARCHAR(255) NOT NULL,
 	`reg_number` VARCHAR(255) NOT NULL,
+	`price_per_day` INT NOT NULL,
 	`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
 
@@ -30,6 +31,7 @@ CREATE TABLE `drivers`(
 	`age` VARCHAR(255) NOT NULL,
 	`cnic_no` VARCHAR(255) NOT NULl,
 	`license_no` VARCHAR(255) NOT NULL,
+	`price_per_day` INT NOT NULL,
 	`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -38,11 +40,21 @@ CREATE TABLE `bookings`(
 	`booking_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`client_id` INT NOT NULL,
 	`car_id` INT NOT NULL,
-	`driver_id` INT NOT NULL,
-	`booking_date` DATE NOT NULL,
+	`driver_id` INT DEFAULT NULL,
+	`booking_date_start` DATE NOT NULL,
+	`booking_date_end` DATE NOT NULL,
 	`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (car_id) REFERENCES cars(id),
 	FOREIGN KEY (client_id) REFERENCES clients(id),
 	FOREIGN KEY (driver_id) REFERENCES drivers(id)
 );
+
+CREATE TABLE `billings`(
+	`id`INT NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+	`booking_id` INT NOT NULL,
+	`total_cost` INT NOT NULL,
+	`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NULL DEFAUlt CURRENT_TIMESTAMP,
+	FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+)
