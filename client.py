@@ -59,3 +59,21 @@ def view_clients():
 
     # Close the database connection
     database.commit_and_close()
+
+def delete_client():
+
+    view_clients()
+
+    client_delete_id = int(input("Enter Client ID you want to delete:"))
+
+    select_client_delete = "DELETE FROM clients WHERE id=%s"
+    cursor = database.execute_query(select_client_delete,(client_delete_id,))
+
+
+    print("Client deleted successfully.")
+
+    print("This is updated client DATA:")
+
+    view_clients()
+
+    database.commit_and_close()

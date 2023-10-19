@@ -1,6 +1,6 @@
-from client import add_client,view_clients  
-from car  import add_car,view_cars
-from driver import add_driver,view_drivers
+from client import add_client,view_clients,delete_client
+from car  import add_car,view_cars,delete_car
+from driver import add_driver,view_drivers,delete_driver
 from booking import add_booking,view_bookings
 from billing import calculate_bill
 import subprocess
@@ -23,7 +23,8 @@ def main_menu():
     print("7.Make Booking")
     print("8.View Bookings")
     print("9.View Total Bill")
-    print("10.Exit")
+    print("10.Update or Delete data.")
+    print("11.Exit")
 
 while True:
     main_menu()
@@ -60,6 +61,40 @@ while True:
         calculate_bill()
 
     elif choice == "10":
+        def update_del_menu():
+            print("1.Update client")
+            print("2.Delete client")
+            print("3.Update Car")
+            print("4.Delete Car")
+            print("5.Update Driver")
+            print("6.Delete Driver")
+            print("7.Get back to main menu.")
+        while True:
+            clear_screen()
+            update_del_menu()
+            
+            choice_2 = input("Enter your choice:")
+
+            if choice_2 == "1":
+                clear_screen()
+            elif choice_2 == "2":
+                clear_screen()
+                delete_client()
+            elif choice_2 == "3":
+                clear_screen()
+            elif choice_2 == "4":
+                clear_screen()
+                delete_car()
+            elif choice_2 == "5":
+                clear_screen()
+            elif choice_2 == "6":
+                clear_screen()
+                delete_driver()
+            elif choice_2 == "7":
+                clear_screen()
+                break
+
+    elif choice == "11":
         clear_screen()
         print("Thanks for choosing Our reant a car service :)")
         break

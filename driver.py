@@ -57,3 +57,19 @@ def view_drivers():
 
     # Close the database connection
     database.commit_and_close()
+
+def delete_driver():
+
+    view_drivers()
+
+    driver_delete_id = int(input("Eneter id to delete the driver:"))
+
+    select_driver_delete = "DELETE FROM drivers WHERE id = %s"
+
+    cursor = database.execute_query(select_driver_delete,(driver_delete_id,))
+
+    print("driver deleted successfully.")
+
+    print("Updated drivers DATA.")
+
+    database.commit_and_close

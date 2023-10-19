@@ -45,3 +45,19 @@ def view_cars():
 
     # Close the database connection
     database.commit_and_close()
+
+def delete_car():
+
+    view_cars()
+
+    car_delete_id = int(input("Enter ID to delete the car:"))
+
+    select_car_delete = "DELETE FROM cars WHERE id = %s"
+    cursor = database.execute_query(select_car_delete,(car_delete_id,))
+
+    print("Car delete successfully.")
+
+    print("Updated cars DATA.")
+    view_cars()
+
+    database.commit_and_close()
