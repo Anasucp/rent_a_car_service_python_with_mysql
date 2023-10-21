@@ -54,10 +54,25 @@ def delete_car():
 
     select_car_delete = "DELETE FROM cars WHERE id = %s"
     cursor = database.execute_query(select_car_delete,(car_delete_id,))
-
+    database.commit_and_close()
     print("Car delete successfully.")
 
-    print("Updated cars DATA.")
+def update_car():
+
     view_cars()
 
+    car_update_id = int(input("Enter Car id For Update:"))
+
+    update_company_name = input("Enter Company Name:")
+    update_model_number = input("Enter Model Number:")
+    update_reg_number = int(input("Enter Registration Number:"))
+    update_price_per_day = int(input("Enter the car per day price:"))
+
+    select_car_update = "UPDATE cars SET company_name=%s,model_number=%s,reg_number=%s,price_per_day=%s WHERE id=%s"
+    updated_data = (update_company_name,update_model_number,update_reg_number,update_price_per_day,car_update_id)
+    cursor = database.execute_query(select_car_update,updated_data)
+
     database.commit_and_close()
+    print("Car details updated successfully.")
+
+

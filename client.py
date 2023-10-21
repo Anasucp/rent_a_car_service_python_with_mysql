@@ -69,11 +69,34 @@ def delete_client():
     select_client_delete = "DELETE FROM clients WHERE id=%s"
     cursor = database.execute_query(select_client_delete,(client_delete_id,))
 
-
+    database.commit_and_close()
     print("Client deleted successfully.")
 
-    print("This is updated client DATA:")
+
+def update_client():
 
     view_clients()
 
+    client_update_id = int(input("Enter CLient ID you want to update: "))
+
+    updated_name = input("Enter your Name:")
+    updated_age = int(input("Enter your age:"))
+    while True:
+        updated_cnic = input("Enter your 13 Digit CNIC Number:")
+        if len(updated_cnic)==13:
+            break
+        else:
+            print("Invalid Cnic")
+    while True:
+        updated_phone_number =input("Enter your phone number:")
+        if len(updated_phone_number)==11:
+            break
+        else:
+            print("Enter Valid phone_number")
+
+    select_client_update = "UPDATE clients SET name=%s,age=%s,cnic=%s,phone_number=%s WHERE id=%s"
+    updated_data = (updated_name,updated_age,updated_cnic,updated_phone_number,client_update_id)
+    cursor = database.execute_query(select_client_update,updated_data)
     database.commit_and_close()
+    print("Client Updated successfully.")
+

@@ -1,6 +1,6 @@
-from client import add_client,view_clients,delete_client
-from car  import add_car,view_cars,delete_car
-from driver import add_driver,view_drivers,delete_driver
+from client import add_client,view_clients,delete_client,update_client
+from car  import add_car,view_cars,delete_car,update_car
+from driver import add_driver,view_drivers,delete_driver,update_driver
 from booking import add_booking,view_bookings
 from billing import calculate_bill
 import subprocess
@@ -76,16 +76,19 @@ while True:
             choice_2 = input("Enter your choice:")
 
             if choice_2 == "1":
+                update_client()
                 clear_screen()
             elif choice_2 == "2":
                 clear_screen()
                 delete_client()
             elif choice_2 == "3":
+                update_car()
                 clear_screen()
             elif choice_2 == "4":
                 clear_screen()
                 delete_car()
             elif choice_2 == "5":
+                update_driver()
                 clear_screen()
             elif choice_2 == "6":
                 clear_screen()

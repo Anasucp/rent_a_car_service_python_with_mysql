@@ -67,9 +67,42 @@ def delete_driver():
     select_driver_delete = "DELETE FROM drivers WHERE id = %s"
 
     cursor = database.execute_query(select_driver_delete,(driver_delete_id,))
-
+    database.commit_and_close()
     print("driver deleted successfully.")
 
-    print("Updated drivers DATA.")
 
-    database.commit_and_close
+def update_driver():
+
+    view_drivers()
+
+    driver_update_id = int(input("Enter Driver ID to Update:"))
+
+    update_name = input("Enter your Name:")
+    update_age = int(input("Enter your age:"))
+    while True:
+        update_cnic_no = input("Enter your 13 Digit CNIC Number:" )
+        if len(update_cnic_no)==13:
+            break
+        else:
+            print("Invalid Cnic")
+    while True:
+        update_license_no = input("Enter your License number:")
+        if len(update_license_no)==13:
+            break
+        else:
+            print("Invalid license_no")
+    update_price_per_day=int (input("Eneter the per day price of Driver:"))
+
+
+
+    select_driver_update = "UPDATE drivers SET name=%s,age=%s,cnic_no=%s,license_no=%s,price_per_day=%s WHERE id=%s"
+    update_data = (update_name,update_age,update_cnic_no,update_license_no,update_price_per_day,driver_update_id)
+    cursor = database.execute_query(select_driver_update,update_data)
+
+    database.commit_and_close()
+
+
+    print("Driver Data update successfully.")
+
+
+    
